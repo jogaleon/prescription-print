@@ -1,0 +1,10 @@
+body {
+    display: flex;
+
+}
+
+#canvas {
+    transform-origin: top left;
+    position: absolute;
+    border: thin black solid;
+}

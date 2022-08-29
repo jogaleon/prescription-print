@@ -5,13 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prescription Print</title>
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Canvas</h1>
-    <input type="file" id="image_input" accept="image/png, image/jpeg">
+    <div class="form">
+        <h1>Input</h1>
+        <input type="file" id="image_input" accept="image/png, image/jpeg"><br />
+        <input type="text" id="name_input" placeholder="Patient Name" /><br />
+        <!-- <input type="text" id="address_input" placeholder="Patient Address" /><br />
+        <input type="text" id="date_input" placeholder="Date" /><br />
+        <label for="sex_input">Sex: </label>
+        <select id="sex_input">
+            <option>M</option>
+            <option>F</option>
+        </select> <br />
+        <input type="number" id="name_input" placeholder="Age" /><br /> -->
+        <button id="print_button">Print</button>
+        <button id="write_text_button">Write Text</button>
+    </div>
     
-    <canvas id="canvas"></canvas>
-    <button id="print_button">Print</button>
+    <div class="display">
+        <h1>Canvas</h1>
+        <p>Click on canvas to set starting point of text</p>
+        <p class="text_coords_display"></p>
+        <canvas id="canvas"></canvas>
+    </div>
 </body>
 </html>
