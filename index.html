@@ -9,20 +9,39 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="form">
-        <h1>Input</h1>
-        <input type="file" id="image_input" accept="image/png, image/jpeg"><br />
-        <input type="text" id="name_input" placeholder="Patient Name" /><br />
-        <!-- <input type="text" id="address_input" placeholder="Patient Address" /><br />
-        <input type="text" id="date_input" placeholder="Date" /><br />
-        <label for="sex_input">Sex: </label>
-        <select id="sex_input">
-            <option>M</option>
-            <option>F</option>
-        </select> <br />
-        <input type="number" id="name_input" placeholder="Age" /><br /> -->
-        <button id="print_button">Print</button>
-        <button id="write_text_button">Write Text</button>
+    <div class="controls">
+        <form id="form">
+            <h1>Input</h1>
+            <input type="file" id="input_image" accept="image/png, image/jpeg"><br />
+            
+            <p>Prescription Information</p>
+            <input type="text" class="input_data" id="input_name" data-name="name" placeholder="Name" required />
+            <input type="button" class="button_set_coords" data-name="name"  value="+" /><br />
+    
+            <input type="text" class="input_data" id="input_address" data-name="address" placeholder="Address" required />
+            <input type="button" class="button_set_coords" data-name="address" value="+" /><br />
+            
+            
+            <input type="number" class="input_data" id="input_age" data-name="age" placeholder="Age" required />
+            <input type="button" class="button_set_coords" data-name="age" value="+" /><br />
+            
+            <label for="input_sex" >Sex: </label>
+            <select class="input_data" id="input_sex" data-name="sex" required>
+                <option value="">-</option>
+                <option>M</option>
+                <option>F</option>
+            </select>
+            <input type="button" class="button_set_coords" data-name="sex" value="+" /><br />
+            
+            <input type="text" class="input_data" id="input_data" data-name="date" placeholder="Date" required />
+            <input type="button" class="button_set_coords" data-name="date" value="+" /><br />
+            
+            <input type="submit" value="Submit input" />
+        </form>
+        
+        <button id="button_print">Print</button>
+        <button id="button_write">Write Text</button>
+
     </div>
     
     <div class="display">
