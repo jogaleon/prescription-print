@@ -1,5 +1,5 @@
 const SCALE_FACTOR = 0.3; 
-
+const FONT_SIZE = 15;
 let textData = {
     name: {
         text: '',
@@ -32,6 +32,10 @@ let textData = {
         width: 0,
     }
 }
+
+const canvas = document.querySelector('#canvas');
+const ctx = canvas.getContext('2d');
+
 //Text input handler
 const form = document.querySelector('#form');
 const submitData = (e) => {
@@ -48,6 +52,22 @@ const submitData = (e) => {
 }
 
 form.addEventListener('submit', submitData);
+
+//Draw Marker
+const drawPointMarker = (x, y, pointWidth) => {
+    const mid = pointWidth / 2;
+    
+    ctx.fillStyle = 'red';
+    ctx.fillRect(x - mid, y - mid, pointWidth, pointWidth);
+}
+
+const drawAreaMarker = (x, y, width, height, lineWidth) => {
+    const midH = height / 2;
+
+    ctx.lineWidth = lineWidth;
+    ctx.strokeStyle = 'red';
+    ctx.strokeRect(x, y - midH, width, height);
+}
 
 //Text coordinates
 const setCoordsButtons = document.querySelectorAll('.button_set_coords');
@@ -70,22 +90,22 @@ const setCoords = (e) => {
         textData[target].x = e.offsetX;
         textData[target].y = e.offsetY;
         setWidth = true;
+        drawPointMarker(textData[target].x, textData[target].y, 10)
         textCoordsDisplay.innerHTML = `X: ${textData[target].x}, Y: ${textData[target].y} W: ${textData[target].width}`;
     } else {
         textData[target].width = e.offsetX - textData[target].x;
         setWidth = false;
         setActive = false;
+        drawAreaMarker(textData[target].x, textData[target].y, textData[target].width, FONT_SIZE / SCALE_FACTOR, 10);
         textCoordsDisplay.innerHTML = `X: ${textData[target].x}, Y: ${textData[target].y} W: ${textData[target].width}`;
     }
 }
 
 setCoordsButtons.forEach(button => {
     button.addEventListener('click', setTarget);
-})
+}); 
 
 //Canvas
-const canvas = document.querySelector('#canvas');
-const ctx = canvas.getContext('2d');
 
 const readFile = (file) => {
     const reader = new FileReader();
@@ -144,7 +164,7 @@ const writeAllTextData = () => {
     for (let i = 0; i < keys.length; i++) {
         const {x, y, width, text} = textData[keys[i]];
         console.log(x, y, width, text)
-        writeText(x, y, width, text, 15, 'black');
+        writeText(x, y, width, text, FONT_SIZE, 'black');
     }
     // textData.forEach(data => {
     //     
