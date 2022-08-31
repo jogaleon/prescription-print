@@ -3,7 +3,8 @@ const container = document.querySelector('#container');
 //Marker dragging
 let dragActive = false;
 let selectedMarker = null;
-let markerOffsetX, markerOffsetY;
+let markerOffsetX = 0; 
+let markerOffsetY = 0;
 let dragCurrentX, dragCurrentY;
 
 const dragStart = (e) => {
@@ -24,10 +25,10 @@ const drag = (e) => {
     dragCurrentY = e.clientY - container.offsetTop - markerOffsetY;
 
     if (dragCurrentX > container.offsetWidth - selectedMarker.offsetWidth || dragCurrentX < 0) return;
-    if (dragCurrentY > container.offsetHeight - selectedMarker.offsetWidth || dragCurrentY < 0) return;
-
-    selectedMarker.style.top = `${dragCurrentY}px`;
     selectedMarker.style.left = `${dragCurrentX}px`;
+    if (dragCurrentY > container.offsetHeight - selectedMarker.offsetHeight || dragCurrentY < 0) return;
+    selectedMarker.style.top = `${dragCurrentY}px`;
+
 }
 
 const dragEnd = (e) => {
@@ -57,6 +58,7 @@ const resizeStart = (e) => {
         resizeActive = true;
         resizeInitialX = e.clientX;
         resizeInitialY = e.clientY;
+
     }
 }
 
@@ -65,6 +67,8 @@ const resize = (e) => {
         // console.log('resizing')
         newWidth = selectedResizeMarker.offsetWidth + e.clientX - resizeInitialX;
         newHeight = selectedResizeMarker.offsetHeight + e.clientY - resizeInitialY;
+        console.log(e)
+        if (newWidth > container.offsetWidth - (e.clientX - container.offsetLeft - newWidth) || newHeight > container.offsetHeight - (e.clientY - container.offsetTop - newHeight)) return;
 
         selectedResizeMarker.style.width = `${newWidth}px`;
         selectedResizeMarker.style.height = `${newHeight}px`;
@@ -79,13 +83,6 @@ const resizeEnd = (e) => {
     selectedResizeMarker = null;
 }
 
-// resizeButtons.forEach(button => {
-//     button.addEventListener('mousedown', resizeStart);
-//     button.addEventListener('mousemove', resize);
-//     button.addEventListener('mouseup', resizeEnd);
-
-// })
-
-    container.addEventListener('mousedown', resizeStart);
-    container.addEventListener('mousemove', resize);
-    container.addEventListener('mouseup', resizeEnd);
+container.addEventListener('mousedown', resizeStart);
+container.addEventListener('mousemove', resize);
+container.addEventListener('mouseup', resizeEnd);
