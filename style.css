@@ -3,8 +3,27 @@ body {
 
 }
 
+#canvas_container {
+    position: relative;
+}
 #canvas {
+    position: absolute;
     transform-origin: top left;
     position: absolute;
     border: thin black solid;
+}
+
+#canvas_marker {
+    position: absolute;
+    width: 1654px;
+    height: 2339px;
+    transform-origin: top left;
+    transform: scale(0.3);
+}
+
+#marker1 {
+    width: 100px;
+    height: 100px;
+    border: thin black solid;
+
 }

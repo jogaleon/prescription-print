@@ -90,13 +90,13 @@ const setCoords = (e) => {
         textData[target].x = e.offsetX;
         textData[target].y = e.offsetY;
         setWidth = true;
-        drawPointMarker(textData[target].x, textData[target].y, 10)
+        // drawPointMarker(textData[target].x, textData[target].y, 10)
         textCoordsDisplay.innerHTML = `X: ${textData[target].x}, Y: ${textData[target].y} W: ${textData[target].width}`;
     } else {
         textData[target].width = e.offsetX - textData[target].x;
         setWidth = false;
         setActive = false;
-        drawAreaMarker(textData[target].x, textData[target].y, textData[target].width, FONT_SIZE / SCALE_FACTOR, 10);
+        // drawAreaMarker(textData[target].x, textData[target].y, textData[target].width, FONT_SIZE / SCALE_FACTOR, 10);
         textCoordsDisplay.innerHTML = `X: ${textData[target].x}, Y: ${textData[target].y} W: ${textData[target].width}`;
     }
 }
@@ -137,6 +137,7 @@ const dataToImage = (data) => {
 const drawImageToCanvas = (imageElement) => {
     canvas.width = imageElement.naturalWidth;
     canvas.height = imageElement.naturalHeight;
+    
     ctx.drawImage(imageElement, 0,0);
     canvas.style.transform = `scale(${SCALE_FACTOR})`;
 }
