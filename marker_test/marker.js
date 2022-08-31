@@ -1,3 +1,5 @@
+const PADDING = 5;
+
 const container = document.querySelector('#container');
 
 //Marker dragging
@@ -24,10 +26,10 @@ const drag = (e) => {
     dragCurrentX = e.clientX - container.offsetLeft - markerOffsetX;
     dragCurrentY = e.clientY - container.offsetTop - markerOffsetY;
 
-    if (dragCurrentX > container.offsetWidth - selectedMarker.offsetWidth || dragCurrentX < 0) return;
+    if (dragCurrentX > container.offsetWidth - selectedMarker.offsetWidth - PADDING || dragCurrentX < PADDING) return;
     selectedMarker.style.left = `${dragCurrentX}px`;
-    if (dragCurrentY > container.offsetHeight - selectedMarker.offsetHeight || dragCurrentY < 0) return;
-    selectedMarker.style.top = `${dragCurrentY}px`;
+    if (dragCurrentY > container.offsetHeight - selectedMarker.offsetHeight - PADDING || dragCurrentY < PADDING) return;
+        selectedMarker.style.top = `${dragCurrentY}px`;
 
 }
 
@@ -41,15 +43,10 @@ container.addEventListener('mousemove', drag);
 container.addEventListener('mouseup', dragEnd);
 
 //Marker resizing
-const resizeButtons = document.querySelectorAll('.marker_resize');
-
 
 let resizeActive = false;
 let selectedResizeMarker = null;
 let resizeInitialX, resizeInitialY;
-
-let addedWidth, addedHeight;
-
 
 const resizeStart = (e) => {
     const isResize = [...e.target.classList].includes('marker_resize');
@@ -58,17 +55,15 @@ const resizeStart = (e) => {
         resizeActive = true;
         resizeInitialX = e.clientX;
         resizeInitialY = e.clientY;
-
     }
 }
 
 const resize = (e) => {
     if (resizeActive) {
-        // console.log('resizing')
         newWidth = selectedResizeMarker.offsetWidth + e.clientX - resizeInitialX;
         newHeight = selectedResizeMarker.offsetHeight + e.clientY - resizeInitialY;
-        console.log(e)
-        if (newWidth > container.offsetWidth - (e.clientX - container.offsetLeft - newWidth) || newHeight > container.offsetHeight - (e.clientY - container.offsetTop - newHeight)) return;
+
+        if (newWidth > container.offsetWidth - (e.clientX - container.offsetLeft - newWidth) - PADDING || newHeight > container.offsetHeight - (e.clientY - container.offsetTop - newHeight) - PADDING) return;
 
         selectedResizeMarker.style.width = `${newWidth}px`;
         selectedResizeMarker.style.height = `${newHeight}px`;

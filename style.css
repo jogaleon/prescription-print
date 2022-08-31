@@ -6,24 +6,50 @@ body {
 #canvas_container {
     position: relative;
 }
+
 #canvas {
     position: absolute;
     transform-origin: top left;
     position: absolute;
-    border: thin black solid;
+    z-index: 1;
 }
 
 #canvas_marker {
     position: absolute;
-    width: 1654px;
-    height: 2339px;
     transform-origin: top left;
-    transform: scale(0.3);
+    border: thin black solid;
+    z-index: 2;
 }
 
-#marker1 {
+.marker {
+    position: absolute;
     width: 100px;
     height: 100px;
-    border: thin black solid;
+    border: thin red solid;
+    box-sizing: border-box;
+    cursor: pointer;
+    z-index: 3;
+}
 
+.marker_resize{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: orange;
+    width: 10px;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+}
+
+.marker_label {
+    position: absolute;
+    top: -0.7rem;
+    
+    margin: 0;
+
+    font-family: sans-serif;
+    font-size: 0.6rem;
+    user-select: none;
+
+    color: red;
 }
